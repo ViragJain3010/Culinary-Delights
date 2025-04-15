@@ -3,14 +3,7 @@
 import { useState } from "react";
 import { NextDrupal } from "next-drupal";
 import { Protected } from "@/components/Protected";
-const token = localStorage.getItem("access_token");
-
-const drupal = new NextDrupal("https://recipes.ddev.site/", {
-  auth: {
-    access_token: token,
-    token_type: "Bearer",
-  },
-});
+import { drupal } from "@/lib/drupal";
 
 export default function PostPage() {
   const [title, setTitle] = useState("");

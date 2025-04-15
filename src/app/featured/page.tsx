@@ -9,9 +9,15 @@ import Link from "next/link"
 import { useRecipes } from "@/context/recipe-context"
 import { LoadingSpinner } from "@/components/loading-spinner"
 import { Recipe } from "@/types/types"
+import {drupal} from "@/lib/drupal"
 
 export default function FeaturedPage() {
   const { featuredRecipes, isLoading, error } = useRecipes()
+
+  async function fetchFeaturedRecipes() {
+    const view = await drupal.getView("featured_recipes_grid--page_1")
+    console.log("🚀 ~ fetchFeaturedRecipes ~ view:", view)
+  }
 
   // Show loading state
   if (isLoading) {
@@ -28,6 +34,8 @@ export default function FeaturedPage() {
       </div>
     )
   }
+
+  fetchFeaturedRecipes()
 
   return (
     <div className="container mx-auto px-4 py-12">

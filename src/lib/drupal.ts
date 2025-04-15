@@ -1,5 +1,6 @@
 // This is a mock implementation of the Drupal API client
 // In a real application, you would use next-drupal to fetch data from your Drupal backend
+import { NextDrupal } from 'next-drupal';
 
 // Mock data for recipes
 const mockRecipes = [
@@ -342,4 +343,13 @@ const mockRecipes = [
     return mockRecipes.find((recipe) => recipe.id === id) || null
   }
   
-  
+
+const token = localStorage.getItem("access_token");
+
+export const drupal = new NextDrupal("https://recipes.ddev.site/", {
+  auth: {
+    access_token: token!,
+    token_type: "Bearer",
+    expires_in: 3600, // Replace 3600 with the appropriate expiration time in seconds
+  },
+});
